@@ -24,7 +24,9 @@
 			function setup() {
 
 				var W = window.innerWidth, H = window.innerHeight;
-				renderer = new THREE.WebGLRenderer();
+renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true } );
+
+	renderer.autoClearColor = false;
 				renderer.setSize( W, H );
 				document.body.appendChild( renderer.domElement );
 
@@ -34,7 +36,16 @@
 				scene = new THREE.Scene();
 
 
+
 				// paste your code from the geometryGUI here
+geometry = new THREE.TorusGeometry(76.49, 46.3, 24, 22, 47.12);
+material = new THREE.MeshNormalMaterial({shading: THREE.FlatShading});
+mesh = new THREE.Mesh(geometry, material);
+mesh.position.y = 103.66;
+mesh.rotation.x = 4.23;
+mesh.rotation.y = 2.65;
+mesh.rotation.z = 4.85;
+scene.add(mesh);
 
 
 			}
@@ -47,6 +58,9 @@
 
 				renderer.render( scene, camera );
 
+      mesh.position.x = Math.sin( Date.now() * 0.001 ) * 50;
+
+	mesh.rotation.z = Date.now() * 0.0005;
 			}
 
 			setup();
